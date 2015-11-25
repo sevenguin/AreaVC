@@ -12,7 +12,6 @@
 
 -(void)loadFromFile{
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"cities" ofType:@"plist"];
-    NSLog(@"filePath:%@", filePath);
     self.area  = [[NSDictionary alloc] initWithContentsOfFile:filePath];
 }
 

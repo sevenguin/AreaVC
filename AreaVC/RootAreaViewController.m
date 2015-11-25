@@ -27,15 +27,12 @@
     
     if(self.target == nil){
         self.target = self;
+        self.choose = @selector(choose:);
     }
     
     headers = @[@[@"定位的位置", @"全部"], @[[[NSNumber alloc] initWithDouble:50], [[NSNumber alloc] initWithDouble:30]]];
     proc = [[AreaDataProc alloc] init];
     [proc loadFromFile];
-    
-    for(NSString* key in proc.area.allKeys){
-        NSLog(@"key:%@", key);
-    }
     
     sections = [[NSMutableArray alloc] init];
     
@@ -52,12 +49,18 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+-(void)choose:(NSString*)result{
+    NSLog(@"result:%@", result);
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     AreaTableViewCell* cell = sections[indexPath.section][indexPath.row];
     NSDictionary* cities = proc.area[cell.textLabel.text];
     SubAreaViewController* subArea = [[SubAreaViewController alloc] init];
     subArea.subArea = cities;
     subArea.target = self.target;
+    subArea.choose = self.choose;
+    subArea.chooseText = cell.textLabel.text;
     [self.navigationController pushViewController:subArea animated:YES];
 }
 

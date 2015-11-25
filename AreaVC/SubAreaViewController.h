@@ -13,5 +13,7 @@
 
 @property (nonatomic)NSObject *subArea;
 @property (nonatomic)UIViewController *target;
+@property (nonatomic)SEL choose;
+@property (nonatomic)NSString *chooseText;
 
 @end

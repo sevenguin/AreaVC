@@ -14,6 +14,7 @@
 @interface RootAreaViewController : UITableViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic)UIViewController *target;
+@property (nonatomic)SEL choose;
 
 @end
 

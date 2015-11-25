@@ -59,15 +59,18 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    AreaTableViewCell* cell = (AreaTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     if(showAccessory){
-        AreaTableViewCell* cell = (AreaTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
         NSObject* subs = [self.subArea valueForKey:cell.textLabel.text];
         SubAreaViewController* subArea = [[SubAreaViewController alloc] init];
         subArea.subArea = subs;
         subArea.target = self.target;
+        subArea.choose = self.choose;
+        subArea.chooseText = self.chooseText;
         [self.navigationController pushViewController:subArea animated:YES];
     }else{
         [self.navigationController popToViewController:self.target animated:YES];
+        [self.target performSelector:self.choose withObject:[NSString stringWithFormat:@"%@ %@", self.chooseText, cell.textLabel.text]];
     }
 }
 
